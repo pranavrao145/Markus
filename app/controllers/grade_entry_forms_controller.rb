@@ -221,8 +221,8 @@ class GradeEntryFormsController < ApplicationController
       flash_message(:error, e.message)
     else
       overwrite = params[:overwrite]
-      grades_file = data[:file]
-      result = @grade_entry_form.from_csv(grades_file.read, overwrite)
+      grades_file = data[:contents]
+      result = @grade_entry_form.from_csv(grades_file, overwrite)
       flash_message(:error, result[:invalid_lines]) unless result[:invalid_lines].empty?
       flash_message(:success, result[:valid_lines]) unless result[:valid_lines].empty?
     end
